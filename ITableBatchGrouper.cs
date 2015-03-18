@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage.Table;
+using System;
+using System.Threading.Tasks;
 namespace AzureStorage.TableBatchGrouper
 {
     public interface ITableBatchGrouper
     {
-        System.Threading.Tasks.Task<Microsoft.WindowsAzure.Storage.Table.TableResult> Delete(Microsoft.WindowsAzure.Storage.Table.ITableEntity entity);
+        Task<TableResult> Delete(ITableEntity entity);
+        Task<TableResult> Insert(ITableEntity entity);
+        Task<TableResult> InsertOrMerge(ITableEntity entity);
+        Task<TableResult> InsertOrReplace(ITableEntity entity);
+        Task<TableResult> Merge(ITableEntity entity);
+        Task<TableResult> Replace(ITableEntity entity);
+        void SetMaxDelayForPartition(string partition, TimeSpan delay);
         void Dispose();
-        System.Threading.Tasks.Task<Microsoft.WindowsAzure.Storage.Table.TableResult> Insert(Microsoft.WindowsAzure.Storage.Table.ITableEntity entity);
-        System.Threading.Tasks.Task<Microsoft.WindowsAzure.Storage.Table.TableResult> InsertOrMerge(Microsoft.WindowsAzure.Storage.Table.ITableEntity entity);
-        System.Threading.Tasks.Task<Microsoft.WindowsAzure.Storage.Table.TableResult> InsertOrReplace(Microsoft.WindowsAzure.Storage.Table.ITableEntity entity);
-        System.Threading.Tasks.Task<Microsoft.WindowsAzure.Storage.Table.TableResult> Merge(Microsoft.WindowsAzure.Storage.Table.ITableEntity entity);
-        System.Threading.Tasks.Task<Microsoft.WindowsAzure.Storage.Table.TableResult> Replace(Microsoft.WindowsAzure.Storage.Table.ITableEntity entity);
     }
 }
